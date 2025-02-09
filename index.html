@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Your one-stop pet store for products, adoption resources, and expert care tips."/>
+  <meta name="keywords" content="Pet Store, Pet Adoption, Pet Supplies, Pet Care, Animals"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Store | Home</title>
+
+  <!-- Inline CSS -->
+  <style>
+    /* ===============================
+       Basic Reset
+    =============================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+    }
+
+    /* ===============================
+       Top Header
+    =============================== */
+    .top-header {
+      background-color: #f0f0f0;
+      padding: 0.5rem 1.5rem;
+    }
+    .top-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .search-toggle {
+      background-color: #8fbc8f;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .search-toggle:hover {
+      background-color: #6aa16a;
+    }
+    .search-form {
+      display: flex; /* toggled by JavaScript */
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      padding: 0 1.5rem;
+    }
+    .search-form input {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      flex: 1;
+    }
+    .search-form button {
+      background-color: #8fbc8f;
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .search-form button:hover {
+      background-color: #6aa16a;
+    }
+    .account-links .sign-in {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      padding: 0.5rem;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
+    .account-links .sign-in:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* ===============================
+       Navigation
+    =============================== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #8fbc8f;
+      padding: 1rem 2rem;
+    }
+    .navbar .logo h1 {
+      color: #fff;
+      font-size: 1.8rem;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.2s ease-in-out;
+    }
+    .nav-links li a:hover {
+      color: #333;
+    }
+
+    /* ===============================
+       Hero Section
+    =============================== */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      text-align: center;
+    }
+    .hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 500px; 
+      object-fit: cover;
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      background-color: rgba(0,0,0,0.5);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .hero-text h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .cta-button {
+      background-color: #ff6f61;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .cta-button:hover {
+      background-color: #e64b3b;
+    }
+
+    /* ===============================
+       Featured Products
+    =============================== */
+    .featured-products {
+      margin: 2rem auto;
+      max-width: 1200px;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .featured-products h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .product-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      flex: 1 1 calc(25% - 2rem);
+      max-width: 300px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .product-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-card p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .product-btn {
+      display: inline-block;
+      background-color: #8fbc8f;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .product-btn:hover {
+      background-color: #6aa16a;
+    }
+
+    /* ===============================
+       Care Tips Preview
+    =============================== */
+    .care-tips-preview {
+      margin: 2rem auto;
+      max-width: 1200px;
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .care-tips-preview h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .care-tips-preview p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    /* ===============================
+       Events Preview
+    =============================== */
+    .events-preview {
+      margin: 2rem auto;
+      max-width: 1200px;
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .events-preview h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .events-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .event-item {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      flex: 1 1 280px;
+      max-width: 400px;
+      padding: 1rem;
+      text-align: left;
+    }
+    .event-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .event-item p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    /* ===============================
+       Contact Section
+    =============================== */
+    .contact-section {
+      margin: 2rem auto;
+      max-width: 800px;
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .contact-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .submit-btn {
+      align-self: flex-start;
+      background-color: #8fbc8f;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #6aa16a;
+    }
+
+    /* ===============================
+       Footer
+    =============================== */
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background-color: #333;
+      color: #fff;
+      padding: 2rem;
+    }
+    .footer > div {
+      flex: 1 1 300px;
+      margin-bottom: 1rem;
+    }
+    .footer h3 {
+      margin-bottom: 1rem;
+    }
+    .footer p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .footer-contact p a {
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .footer-social ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer-social ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-social ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social ul li a:hover {
+      color: #ff6f61;
+    }
+
+    /* ===============================
+       Modals (Login, Signup)
+    =============================== */
+    .modal {
+      display: none; /* hidden by default; toggled via JS */
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5); /* semi-transparent overlay */
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeInDown 0.3s ease-out;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: #999;
+      transition: color 0.2s;
+    }
+    .close:hover {
+      color: #333;
+    }
+    .modal-content h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .modal-subtitle {
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #8fbc8f; /* highlight color */
+      box-shadow: 0 0 3px rgba(143,188,143,0.5);
+    }
+    .role-select {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+    .role-select label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .role-select input[type="radio"] {
+      margin-right: 0.25rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      width: 100%;
+      background-color: #8fbc8f;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.55rem 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .btn-primary:hover {
+      background-color: #6aa16a;
+    }
+    .signup-option {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .signup-option a {
+      color: #8fbc8f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .signup-option a:hover {
+      text-decoration: underline;
+    }
+    .modal.show {
+      display: flex; /* triggers the overlay to appear */
+    }
+
+    /* ===============================
+       Responsive Tweaks
+    =============================== */
+    @media (max-width: 992px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-image {
+        max-height: 300px;
+      }
+      .hero-text {
+        position: static;
+        transform: none;
+        background-color: #8fbc8f;
+        margin: 1rem auto;
+      }
+    }
+    @media (max-width: 768px) {
+      .products-container,
+      .events-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .product-card {
+        max-width: 90%;
+      }
+      .search-form {
+        flex-direction: column;
+      }
+      .search-form button {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Header -->
+  <div class="top-header">
+    <div class="top-header-inner">
+      <!-- Search Toggle Button -->
+      <button class="search-toggle" id="searchToggleBtn">Search</button>
+      <!-- Account / Login Button -->
+      <div class="account-links">
+        <button id="loginBtn" class="sign-in">Login</button>
+      </div>
+    </div>
+    <!-- Collapsible Search Form -->
+    <form class="search-form" id="searchForm" action="#" method="get">
+      <input type="search" placeholder="Search..." aria-label="Search" />
+      <button type="submit">Go</button>
+    </form>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">
+      <h1>Pet Store</h1>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Adopt</a></li>
+        <li><a href="#">Care Tips</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <img 
+      src="img-requirements-to-adopt-a-pet.jpg" 
+      alt="Adoption Picture" 
+      class="hero-image"
+    />
+    <div class="hero-text">
+      <h2>Welcome to Our Pet Store</h2>
+      <p>Your one-stop hub for pet products, adoption resources, and expert care tips.</p>
+      <a href="#" class="cta-button">Shop Now</a>
+    </div>
+  </section>
+  
+  <!-- Featured Products -->
+  <section class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="products-container">
+      <!-- Example Product Card 1 -->
+      <div class="product-card">
+        <img src="DogFood.jpg" alt="Premium Dog Food">
+        <h3>Premium Dog Food</h3>
+        <p>High-quality nourishment for your canine companion.</p>
+        <a href="#" class="product-btn">Add to Cart</a>
+      </div>
+      <!-- Product Card 2 -->
+      <div class="product-card">
+        <img src="CatToy.webp" alt="Interactive Cat Toy">
+        <h3>Interactive Cat Toy</h3>
+        <p>Keep your cat active and entertained all day long.</p>
+        <a href="#" class="product-btn">Add to Cart</a>
+      </div>
+      <!-- Product Card 3 -->
+      <div class="product-card">
+        <img src="Gold_Choke_Parent.jpg" alt="Stylish Dog Collar">
+        <h3>Stylish Dog Collar</h3>
+        <p>Comfortable and fashionable for everyday wear.</p>
+        <a href="#" class="product-btn">Add to Cart</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Tips Preview -->
+  <section class="care-tips-preview">
+    <h2>Expert Pet Care Tips</h2>
+    <p>From grooming and nutrition to training and health, our resources are here to help.</p>
+    <a href="#" class="cta-button">Explore Care Tips</a>
+  </section>
+
+  <!-- Events Preview -->
+  <section class="events-preview">
+    <h2>Upcoming Events</h2>
+    <div class="events-container">
+      <article class="event-item">
+        <h3>Adoption Drive & Pet Meet</h3>
+        <p><strong>Date:</strong> March 12, 2025</p>
+        <p><strong>Time:</strong> 10am - 2pm</p>
+        <p>Meet adorable pets looking for their forever homes.</p>
+      </article>
+      <article class="event-item">
+        <h3>Pet Care Workshop</h3>
+        <p><strong>Date:</strong> March 20, 2025</p>
+        <p><strong>Time:</strong> 3pm - 5pm</p>
+        <p>Learn best practices for grooming, training, and nutrition.</p>
+      </article>
+    </div>
+    <a href="#" class="cta-button">View Full Calendar</a>
+  </section>
+  
+  <!-- Contact Form -->
+  <section class="contact-section">
+    <h2>Have a Question? Get in Touch!</h2>
+    <form action="#" class="contact-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p>123 Pet Lane, Animal City</p>
+      <p>Email: info@petstore.com | Phone: (123) 456-7890</p>
+      <p>Open Hours: Mon - Fri: 9am - 7pm, Sat: 10am - 6pm</p>
+      <p><a href="#">Live Chat</a> (Coming Soon!)</p>
+    </div>
+    <div class="footer-social">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li><a href="#" target="_blank">Facebook</a></li>
+        <li><a href="#" target="_blank">Instagram</a></li>
+        <li><a href="#" target="_blank">Twitter</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label>
+          <input type="radio" name="role" value="user" checked> User
+        </label>
+        <label>
+          <input type="radio" name="role" value="admin"> Admin
+        </label>
+        <button type="submit" id="loginSubmit">Submit</button>
+      </form>
+      <p id="loginMessage"></p>
+    </div>
+  </div>
+      
+
+      <!-- Username & Password Fields -->
+      <div class="form-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter your username" />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" />
+      </div>
+      
+      <button class="btn-primary" id="loginSubmitBtn">Login</button>
+
+      <!-- Sign Up Link (only for user role) -->
+      <div class="signup-option" id="signupOption">
+        <p>Don’t have an account?
+          <a href="#" id="showSignupBtn">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeSignupModalBtn">&times;</span>
+      <h2>Create an Account</h2>
+      <p class="modal-subtitle">Join our community of pet lovers!</p>
+      
+      <div class="form-group">
+        <label for="signupUsername">Username</label>
+        <input type="text" id="signupUsername" placeholder="Choose a username" />
+      </div>
+      <div class="form-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password" />
+      </div>
+      <div class="form-group">
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" placeholder="Your email address" />
+      </div>
+      <div class="form-group">
+        <label for="signupAge">Age</label>
+        <input type="number" id="signupAge" placeholder="e.g. 25" />
+      </div>
+      <div class="form-group">
+        <label for="signupPhone">Phone (optional)</label>
+        <input type="text" id="signupPhone" placeholder="Your phone number" />
+      </div>
+      
+      <button class="btn-primary" id="signupSubmitBtn">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- JavaScript (Search Toggle + Modal Logic) -->
+  <script>
+    
+    
+    // =========================================
+    // SEARCH TOGGLE
+    // =========================================
+    const searchToggleBtn = document.getElementById('searchToggleBtn');
+    const searchForm = document.getElementById('searchForm');
+    searchForm.style.display = 'none';
+    searchToggleBtn.addEventListener('click', () => {
+      if (searchForm.style.display === 'none') {
+        searchForm.style.display = 'flex';
+      } else {
+        searchForm.style.display = 'none';
+      }
+    });
+
+    // =========================================
+    // LOGIN MODAL
+    // =========================================
+    const loginBtn = document.getElementById("loginBtn");
+    const loginModal = document.getElementById("loginModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    loginBtn.addEventListener("click", () => {
+      loginModal.style.display = "flex";
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      loginModal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === loginModal) {
+        loginModal.style.display = "none";
+      }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const loginUrl = "http://localhost/hilcoe-project-pet-store/user.php";
+
+      console.log("Sending login request to:", loginUrl);
+
+      fetch(loginUrl, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Response received:", data);
+        document.getElementById("loginMessage").innerText = data.message;
+        if (data.success) {
+          window.location.href = "adopt_user.html";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        console.log(error);
+        document.getElementById("loginMessage").innerText = "An error occurred.";
+      });
+    });
+    // =========================================
+    // SIGNUP MODAL
+    // =========================================
+    const showSignupBtn       = document.getElementById('showSignupBtn');
+    const signupModal         = document.getElementById('signupModal');
+    const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
+
+    showSignupBtn.addEventListener('click', () => {
+      // Hide login modal, show signup
+      loginModal.style.display = 'none';
+      signupModal.style.display = 'flex';
+    });
+    closeSignupModalBtn.addEventListener('click', () => {
+      signupModal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target === signupModal) {
+        signupModal.style.display = 'none';
+      }
+    });
+
+    // =========================================
+    // OPTIONAL: Hide "Sign Up" link if Admin is selected
+    // =========================================
+    const roleUser  = document.getElementById('roleUser');
+    const roleAdmin = document.getElementById('roleAdmin');
+    const signupOption = document.getElementById('signupOption');
+
+    function toggleSignupLink() {
+      if (roleAdmin.checked) {
+        signupOption.style.display = 'none';
+      } else {
+        signupOption.style.display = 'block';
+      }
+    }
+
+    roleUser.addEventListener('change', toggleSignupLink);
+    roleAdmin.addEventListener('change', toggleSignupLink);
+  </script>
+</body>
+</html>

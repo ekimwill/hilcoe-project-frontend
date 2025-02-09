@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Adopt a pet and save a life." />
+  <meta name="keywords" content="Pet Adoption, Animal Shelter, Cats, Dogs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adopt a Pet</title>
+
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: #8fbc8f;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: bold;
+    }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 0.75rem;
+      font-weight: 600;
+      transition: color 0.2s ease-in;
+    }
+    header nav a:hover {
+      color: #2f4f2f;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 500px; /* Adjust as needed */
+      overflow: hidden;
+      color: #fff;
+    }
+    /* The hero image fully covers the hero-section */
+    .hero-section img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  /* ensures the image fills container without distortion */
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0; 
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2; /* above the overlay */
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 800px;
+      width: 90%;
+      padding: 0 1rem;
+    }
+    .hero-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    }
+    .hero-content button {
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      text-shadow: none;
+      transition: background-color 0.2s;
+    }
+    .hero-content button:hover {
+      background-color: #e64b3b;
+    }
+
+    /* Pets Section */
+    .pets-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .pets-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .pets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .pet-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    /* Pet images fill their 200px-tall card, cropped if needed */
+    .pet-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .pet-card-content {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pet-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .pet-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.4;  
+    }
+    .adopt-button {
+      background-color: #8fbc8f;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 4px;
+      font-weight: 600;
+      align-self: flex-start; /* positions to the left if space allows */
+      transition: background-color 0.2s;
+    }
+    .adopt-button:hover {
+      background-color: #6aa16a;
+    }
+
+    /* Next Arrow */
+    .next-arrow {
+      display: flex;
+      justify-content: flex-end;
+      margin: 1.5rem 2rem;
+    }
+    .next-arrow a {
+      font-size: 2rem;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .next-arrow a:hover {
+      color: #8fbc8f;
+    }
+
+    /* Save a Life Story Section */
+    .save-life-section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem 1rem;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .save-life-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .save-life-section p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-section {
+        height: 300px; /* reduce the hero height for smaller screens if needed */
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Adopt A Pet</div>
+    <nav>
+      <!-- "Go Back" could link to a previous page -->
+      <a href="#">Go Back</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- This image covers the entire hero container -->
+    <img src="PetAdoptionTips850.jpg" alt="Hero Dog" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Give a Friend a Forever Home</h1>
+      <p>
+        Adopting a pet saves not just one life, but two—the pet’s 
+        and the new space you open at the shelter.
+      </p>
+      <button onclick="scrollToPets()">Meet Our Pets</button>
+    </div>
+  </section>
+
+  <!-- Pets Section -->
+  <section class="pets-section" id="petsSection">
+    <h2>Meet the Adorable Friends Waiting for You</h2>
+    <div class="pets-grid" id="petsGrid">
+      <!-- Pets will be dynamically inserted here -->
+    </div>
+  </section>
+  <!-- Next Arrow (bookmark link to Save a Life Story) -->
+  <div class="next-arrow">
+    <a href="#saveLifeStory">&#8594;</a>
+  </div>
+
+  <!-- Save a Life Story Section -->
+  <section class="save-life-section" id="saveLifeStory">
+    <h2>Save a Life Story</h2>
+    <p>
+      When you adopt, you help more than just one pet. Shelters operate at capacity,
+      often turning away animals in need because there simply isn't enough room.
+      By taking one pet home, you free up space for the shelter to rescue another—
+      effectively saving two lives.
+    </p>
+    <p>
+      It’s not just about numbers, though. Each adoption story is a personal journey.
+      Pets come from varied backgrounds—some were strays, others were surrendered,
+      and many have overcome hardships. By offering them a loving home, you change
+      their world forever. And in return, you’ll find your life enriched by their
+      companionship, loyalty, and endless gratitude.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Adopt A Pet Organization. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth-scroll down to the pets grid when the hero button is clicked
+    function scrollToPets() {
+      const petsSection = document.getElementById('petsSection');
+      petsSection.scrollIntoView({ behavior: "smooth" });
+    }
+    
+
+
+    function fetchPets() {
+      fetch("http://localhost/hilcoe-project-pet-store/pets.php?view_pets")
+        .then(response => response.json())
+        .then(data => {
+          const petsGrid = document.getElementById("petsGrid");
+          petsGrid.innerHTML = "";
+
+          data.forEach(pet => {
+            const petCard = document.createElement("div");
+            petCard.classList.add("pet-card");
+
+            const petImage = pet.image ? pet.image : "default-image.jpg";
+
+            petCard.innerHTML = `
+              <img src="${petImage}" alt="${pet.name}">
+              <div class="pet-card-content">
+                <h3>${pet.name}</h3>
+                <p>${pet.description || "No description available."}</p>
+                <button class="adopt-button">Adopt</button>
+              </div>
+            `;
+
+            petsGrid.appendChild(petCard);
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching pets:", error);
+        });
+    }
+
+    window.addEventListener("DOMContentLoaded", fetchPets);
+  </script>
+</body>
+</html>
